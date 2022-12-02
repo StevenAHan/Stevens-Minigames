@@ -21,7 +21,6 @@ def twenty_four():
     if request.method == "POST":
         numbers = request.form.get("numbers")
         show_ans = request.form.get("show-ans")
-        print("Test")
         if(numbers == "" or show_ans == ""):
             flash("Incorrect Inputs")
         to_input = ["./solver"]
@@ -34,7 +33,7 @@ def twenty_four():
         outputs[0] += " for " + str(numbers)
         if(len(outputs) - 1 > 0):
             outputs.insert(1, "Number of Solution(s): " + str(len(outputs) - 1))
-        return render_template("index.html", outputs = outputs)
+        return render_template("twenty_four.html", outputs = outputs)
 
     return render_template("twenty_four.html", outputs = [""])
 
