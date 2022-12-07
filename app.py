@@ -41,7 +41,7 @@ def twenty_four():
 def wip():
     return render_template("wip.html")
 
-@app.route("/sudoku-solver")
+@app.route("/sudoku_solver")
 def sudoku_solver():
     return render_template("sudoku_solver.html")
 
