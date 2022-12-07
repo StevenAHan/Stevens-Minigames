@@ -41,6 +41,10 @@ def twenty_four():
 def wip():
     return render_template("wip.html")
 
+@app.route("/sudoku-solver")
+def sudoku_solver():
+    return render_template("sudoku_solver.html")
+
     
 if __name__ == "__main__":
     app.run(debug=True)
