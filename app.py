@@ -37,6 +37,10 @@ def twenty_four():
 
     return render_template("twenty_four.html", outputs = [""])
 
+@app.route("/wip")
+def wip():
+    return render_template("wip.html")
+
     
 if __name__ == "__main__":
     app.run(debug=True)
