@@ -23,7 +23,7 @@ def twenty_four():
         show_ans = request.form.get("show-ans")
         if(numbers == "" or show_ans == ""):
             flash("Incorrect Inputs")
-        to_input = ["./solver"]
+        to_input = ["./twentyFourSolver"]
         numbers_arr = numbers.split()
         to_input += numbers_arr
         to_input.append(show_ans)
