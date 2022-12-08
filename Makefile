@@ -1,4 +1,4 @@
-output: solver.cpp
+output: twentyFourSolver.cpp
 	g++ -o twentyFourSolver twentyFourSolver.cpp
 
 clean:
