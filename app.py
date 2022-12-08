@@ -45,7 +45,7 @@ def wip():
 def sudoku_solver():
     return render_template("sudoku_solver.html")
 
-@app.route("spellcast_solver")
+@app.route("/spellcast_solver")
 def spellcast_solver():
     return render_template("spellcast_solver.html")
 
