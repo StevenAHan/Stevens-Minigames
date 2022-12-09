@@ -1,5 +1,5 @@
-table{
+.the-table{
     border: solid 1px gray;
     width: 50%;
   }
-  input{ width: 100%; }
+.tblinput{ width: 100%;}

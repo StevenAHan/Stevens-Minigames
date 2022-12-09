@@ -48,6 +48,9 @@ def sudoku_solver():
         to_input += "[53..7....][6..195...][.98....6.][8...6...3][4..8.3..1][7...2...6][.6....28.][...419..5][....8..79]"
         print(to_input)
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
+        # if there is no solution
+        if(output[0] == "T"):
+            return render_template("sudoku_solver.html", tbl = output)
         outputs = output.split("\n")
         for i in range(len(outputs)):
             outputs[i] = outputs[i][1:-1]
