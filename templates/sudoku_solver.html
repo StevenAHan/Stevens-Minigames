@@ -2,5 +2,19 @@
 
 {% block content %}
     <h1>Sudoku Solver</h1>
-    <p>Cri</p>
+    <p>Insert the Incomplete Sudoku Board</p>
+
+    <div class="main">
+        <form action="/sudoku_solver" method="post">
+
+            
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Check For Answer(s)</button>
+        </div>
+
+        <div>   
+            <p class="ans"> {{ output }} </p>
+        </div>
+    </div>
 {% endblock %}

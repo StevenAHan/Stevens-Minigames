@@ -41,8 +41,16 @@ def twenty_four():
 def wip():
     return render_template("wip.html")
 
-@app.route("/sudoku_solver")
+@app.route("/sudoku_solver", methods=["GET", "POST"])
 def sudoku_solver():
+    if request.method == "POST":
+        to_input = ['./sudokuSolver']
+        to_input += "[53..7....][6..195...][.98....6.][8...6...3][4..8.3..1][7...2...6][.6....28.][...419..5][....8..79]"
+        print(to_input)
+        output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
+        print(output)
+        return render_template("sudoku_solver.html", output = output)
+
     return render_template("sudoku_solver.html")
 
 @app.route("/spellcast_solver")
