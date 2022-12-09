@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sudokuStyle.css' ) }}">
+{% endblock %}
 
+{% block title %} Sudoku Solver {% endblock %}
 {% block content %}
     <h1>Sudoku Solver</h1>
     <p>Insert the Incomplete Sudoku Board:</p>
@@ -126,11 +130,11 @@
         </div>
 
         <div>   
-            <table>
+            <table class="the-table">
                 {%for row in tbl%}
                    <tr>
                       {%for col in row%}
-                        <td>{{col}}</td>
+                        <td class="tblinput">{{col}}</td>
                       {%endfor%}
                    </tr>
                 {%endfor%}
