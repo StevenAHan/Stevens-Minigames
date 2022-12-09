@@ -94,6 +94,6 @@ int main(int argc, char** argv) {
         {
             cout << val << ",";
         }
-        cout << "]";
+        cout << "]" << endl;
     }
 }
