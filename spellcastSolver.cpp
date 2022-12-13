@@ -175,14 +175,7 @@ int main(int argc, char** argv) {
         boardStr += argv[i];
     }
     vector<vector<Cell>> board = convertBoard(boardStr);
-    solver(board);
-    for(const vector<char>& row : board)
-    {
-        cout << '[';
-        for(char val : row)
-        {
-            cout << val << ",";
-        }
-        cout << "]" << endl;
-    }
+    unordered_set<string> dictionary;
+    // TODO implement the dictionary
+    cout << solver(board, dictionary).second << endl;
 }
