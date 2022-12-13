@@ -1,5 +1,5 @@
 # Steven's Minigames
-A website hosting a collection of minigames and solvers for minigames that I have made. The apps include: 24GameSolver
+https://stevens-minigames.herokuapp.com/. A website hosting a collection of minigames and solvers for minigames that I have made. The apps include: 24GameSolver
 
 ## 24GameSolver
 An application that finds all the solutions to a set of numbers in the popular 24 Game, where the objective is to find a way to multiply, add, subtract, and divide all of the numbers in a way to reach 24.
