@@ -60,8 +60,13 @@ def sudoku_solver():
 
     return render_template("sudoku_solver.html")
 
-@app.route("/spellcast_solver")
+@app.route("/spellcast_solver", methods=["GET", "POST"])
 def spellcast_solver():
+    if request.method == "POST":
+        to_input = ["./spellcastSolver"]
+        output = to_input
+        return render_template("spellcast_solver.html", output = output)
+
     return render_template("spellcast_solver.html")
 
     

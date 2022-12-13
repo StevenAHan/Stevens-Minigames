@@ -4,4 +4,23 @@
 {% block content %}
     <h1>Spellcast Solver(WIP)</h1>
     <p>A Solver for the Discord Nitro Activity, Spellcast. Will return the best word to use given the board.</p>
+    <h1>24 Game Solver</h1>
+        <br>
+        <div class="main">
+          <form action="/spellcast_solver" method="post">
+          <div class="form-group">
+            <label for="numbers">Enter in the Letters, separating the rows with spaces:</label>
+            <input type="text" name="letters" placeholder="ex: abcde fghij lmnop..." class="Inputs"></input>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Check For Answer</button>
+          </div>
+
+          <div>
+            {% for output in outputs %}   
+            <p class="ans"> {{ output }} </p>
+             {% endfor %}
+          </div>
+        
 {% endblock %}
