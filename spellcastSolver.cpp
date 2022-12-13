@@ -30,10 +30,10 @@ vector<vector<Cell>> convertBoard(const string& board)
     // Default point values for each character
     unordered_map<char, int> defaults;
     defaults = {{'a', 1}, {'b', 4}, {'c', 5}, {'d', 3}, {'e', 1},
-            {'f', 5}, {'g', }, {'h', }, {'i', 1}, {'j', },
-            {'k', }, {'l', 3}, {'m', 4}, {'n', 2}, {'o', 1},
-            {'p', }, {'q', 8}, {'r', 2}, {'s', }, {'t', 2},
-            {'u', 4}, {'v', }, {'w', }, {'x', 7}, {'y', }, {'z', }};
+            {'f', 5}, {'g', 3}, {'h', 4}, {'i', 1}, {'j', 7},
+            {'k', 6}, {'l', 3}, {'m', 4}, {'n', 2}, {'o', 1},
+            {'p', 4}, {'q', 8}, {'r', 2}, {'s', 2}, {'t', 2},
+            {'u', 4}, {'v', 5}, {'w', 5}, {'x', 7}, {'y', }, {'z', }};
 
     vector<vector<Cell>> vec(5, vector<Cell>(5, Cell('/', 0)));
     int col = 0;
