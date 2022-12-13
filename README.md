@@ -6,11 +6,11 @@ https://stevens-minigames.herokuapp.com/24solver. An application that finds all 
 
 ### How to Use
 
-https://stevens-minigames.herokuapp.com/sudoku_solver. In the numbers, type in at most 6 numbers, separated by at least one space, and select whether you want to see the solution or not. Then click the button and see the result.
+In the numbers, type in at most 6 numbers, separated by at least one space, and select whether you want to see the solution or not. Then click the button and see the result.
 
 ## Sudoku Solver
 
-Given a incomplete board, determines if there is a valid solution for the problem. If there is, gives the solution.
+https://stevens-minigames.herokuapp.com/sudoku_solver. Given a incomplete board, determines if there is a valid solution for the problem. If there is, gives the solution.
 
 ### How to Use
 
