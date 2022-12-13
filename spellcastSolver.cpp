@@ -14,7 +14,7 @@ using namespace std;
 
 
 /*
-    The cell is what will contain the letter and its respective point value
+    The cell is what will contain the letter and its respective point value.
 */
 struct Cell {
     Cell(char letter, int points) : letter(letter), points(points) {}
@@ -23,7 +23,7 @@ struct Cell {
 };
 
 /*
-    Converts the string of the board into the board used for the solver
+    Converts the string of the board into the board used for the solver.
 */
 vector<vector<Cell>> convertBoard(const string& board)
 {
@@ -55,7 +55,7 @@ vector<vector<Cell>> convertBoard(const string& board)
 }
 
 /*
-    Helper used to find the largest word recursively, and generate a list of valid words
+    Helper used to find the largest word recursively, and generate a list of valid words.
 */
 pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered_set<string>& dictionary, vector<vector<bool>>& alreadyUsed, int row, int col, string prevWord, int prevVal, unordered_map<string,int>& listOfValids)
 {
@@ -145,6 +145,9 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     return currMax;
 }
 
+/*
+    Primary Solver Function. Returns the largest word and its point value given the board and a dictionary of valid words.
+*/
 pair<int,string> solver(const vector<vector<Cell>>& board, const unordered_set<string>& dictionary)
 {
     // Used to keep track of if the letter is already being used for the word
@@ -168,6 +171,9 @@ pair<int,string> solver(const vector<vector<Cell>>& board, const unordered_set<s
     return bestWord;
 }
 
+/*
+    Main function. Reads the command line and runs the solver. Returns the best word.
+*/
 int main(int argc, char** argv) {
     string boardStr;
     for(int i = 1; i < argc; i++)
@@ -177,5 +183,17 @@ int main(int argc, char** argv) {
     vector<vector<Cell>> board = convertBoard(boardStr);
     unordered_set<string> dictionary;
     // TODO implement the dictionary
+
     cout << solver(board, dictionary).second << endl;
 }
+
+/*
+    Things that still must be done
+
+    - Finish the default character values.
+    - Implement length boost
+    - Implement double, triple words.
+    - Implement double cell.
+    - Implement dictionary.
+    - Implement power ups.
+*/
