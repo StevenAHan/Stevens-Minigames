@@ -1,8 +1,10 @@
-output: twentyFourSolver.cpp
+all: twentyFourSolver sudokuSolver
+
+twentyFourSolver: twentyFourSolver.cpp
 	g++ -o twentyFourSolver twentyFourSolver.cpp
 
-# output: sudokuSolver.cpp
-# 	g++ -o sudokuSolver sudokuSolver.cpp
+sudokuSolver: sudokuSolver.cpp
+	g++ -o sudokuSolver sudokuSolver.cpp
 
 clean:
 	rm *.o
