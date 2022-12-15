@@ -44,9 +44,7 @@ def wip():
 @app.route("/sudoku_solver", methods=["GET", "POST"])
 def sudoku_solver():
     if request.method == "POST":
-        to_input = ['./sudokuSolver']
-        to_input += "[53..7....][6..195...][.98....6.][8...6...3][4..8.3..1][7...2...6][.6....28.][...419..5][....8..79]"
-        print(to_input)
+        to_input = ['./sudokuSolver', "[53..7....][6..195...][.98....6.][8...6...3][4..8.3..1][7...2...6][.6....28.][...419..5][....8..79]"]
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         # if there is no solution
         if(output[0] == "T"):
@@ -63,7 +61,9 @@ def sudoku_solver():
 @app.route("/spellcast_solver", methods=["GET", "POST"])
 def spellcast_solver():
     if request.method == "POST":
-        to_input = ["./spellcastSolver"]
+        letters = request.form.get("letters")
+        letters = letters.strip()
+        to_input = ["./spellcastSolver", letters]
         output = to_input
         return render_template("spellcast_solver.html", output = output)
 
