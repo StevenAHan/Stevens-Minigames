@@ -10,6 +10,7 @@ Made By: Steven Han
 #include <unordered_set>
 #include <unordered_map>
 #include <map>
+#include <fstream>
 using namespace std;
 
 
@@ -33,7 +34,7 @@ vector<vector<Cell>> convertBoard(const string& board)
             {'f', 5}, {'g', 3}, {'h', 4}, {'i', 1}, {'j', 7},
             {'k', 6}, {'l', 3}, {'m', 4}, {'n', 2}, {'o', 1},
             {'p', 4}, {'q', 8}, {'r', 2}, {'s', 2}, {'t', 2},
-            {'u', 4}, {'v', 5}, {'w', 5}, {'x', 7}, {'y', }, {'z', }};
+            {'u', 4}, {'v', 5}, {'w', 5}, {'x', 7}, {'y', 4}, {'z', 5}};
 
     vector<vector<Cell>> vec(5, vector<Cell>(5, Cell('/', 0)));
     int col = 0;
@@ -68,6 +69,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
         listOfValids[currWord] = currVal;
         currMax = make_pair(currVal, currWord);
     }
+
     alreadyUsed[row][col] = true;
     // right
     if(col < board[row].size() - 1 && alreadyUsed[row][col + 1] == false)
@@ -182,9 +184,19 @@ int main(int argc, char** argv) {
     }
     vector<vector<Cell>> board = convertBoard(boardStr);
     unordered_set<string> dictionary;
-    // TODO implement the dictionary
-
-    cout << solver(board, dictionary).second << endl;
+    ifstream ifs("static/files/diction.txt");
+    if(!ifs)
+    {
+        cout << "Dictionary Not Found..." << endl;
+        exit(1);
+    }
+    string word;
+    while(ifs >> word)
+    {
+        dictionary.insert(word);
+    }
+    auto result = solver(board, dictionary);
+    cout << result.second << ' ' << result.first << endl;
 }
 
 /*
@@ -194,6 +206,5 @@ int main(int argc, char** argv) {
     - Implement length boost
     - Implement double, triple words.
     - Implement double cell.
-    - Implement dictionary.
     - Implement power ups.
 */
