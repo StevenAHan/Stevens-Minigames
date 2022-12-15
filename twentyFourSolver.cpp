@@ -36,7 +36,7 @@ string duplicateRemover(string& orig)
 // Solves the problem, returning a string of the answers
 string solver(vector<pair<double,string>>& nums) 
 {
-    if(nums.size() == 1 && nums[0].first > 23.99 && nums[0].first <= 24)
+    if(nums.size() == 1 && nums[0].first > 23.99999 && nums[0].first <= 24)
     {
         return (nums[0].second + "\n");
     }
