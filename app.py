@@ -64,7 +64,7 @@ def spellcast_solver():
         letters = request.form.get("letters")
         letters = letters.strip()
         to_input = ["./spellcastSolver", letters]
-        output = to_input
+        output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         return render_template("spellcast_solver.html", output = output)
 
     return render_template("spellcast_solver.html")
