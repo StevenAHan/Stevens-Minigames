@@ -62,8 +62,9 @@ def sudoku_solver():
 def spellcast_solver():
     if request.method == "POST":
         letters = request.form.get("letters")
+        unique_tiles = request.form.get("unique-tiles")
         letters = letters.strip()
-        to_input = ["./spellcastSolver", letters]
+        to_input = ["./spellcastSolver", letters, unique_tiles]
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         return render_template("spellcast_solver.html", output = output)
 

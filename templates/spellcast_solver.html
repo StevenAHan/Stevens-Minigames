@@ -8,9 +8,14 @@
         <div class="main">
           <form action="/spellcast_solver" method="post">
           <div class="form-group">
-            <label for="numbers">Enter in the Letters, separating the rows with spaces:</label>
-            <input type="text" name="letters" placeholder="ex: abcde fghij lmnop..." class="Inputs"></input>
+            <label for="letters">Enter in the Letters, separating the rows with spaces:</label>
+            <input type="text" name="letters" placeholder="ex: abcdefghijlmnop..." class="Inputs"></input>
+
+            <label for="unique-tiles">Enter in the Unique Tiles(Instructions WIP):</label>
+            <input type="text" name="unique-tiles" placeholder="ex: 00 002" class="Inputs"></input>
           </div>
+
+
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Check For Answer</button>
