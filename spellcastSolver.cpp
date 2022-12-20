@@ -20,15 +20,16 @@ using namespace std;
     The cell is what will contain the letter and its respective point value.
 */
 struct Cell {
-    Cell(char letter, int points) : letter(letter), points(points) {}
+    Cell(char letter, int points) : letter(letter), points(points), isDouble(false) {}
     char letter;
     int points;
+    bool isDouble;
 };
 
 /*
     Converts the string of the board into the board used for the solver.
 */
-vector<vector<Cell>> convertBoard(const string& board)
+vector<vector<Cell>> convertBoard(const string& board, const string& multipliedWord, const string& doublePos)
 {
     // Default point values for each character
     unordered_map<char, int> defaults;
@@ -54,6 +55,8 @@ vector<vector<Cell>> convertBoard(const string& board)
             col++;
         }
     }
+    vec[multipliedWord[0] - 48][multipliedWord[1] - 48].points *= multipliedWord[2] - 48;
+    vec[doublePos[0] - 48][doublePos[1] - 48].isDouble = true;
     return vec;
 }
 
@@ -201,16 +204,20 @@ bool Trie::deletion(Trie*& curr, string key)
 */
 pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered_set<string>& dictionary, 
     vector<vector<bool>>& alreadyUsed, int row, int col, string prevWord, int prevVal, unordered_map<string,int>& listOfValids, 
-    Trie* head)
+    Trie* head, bool isDoubled)
 {
     string currWord = prevWord + board[row][col].letter;
     int currVal = prevVal + board[row][col].points;
+    if(board[row][col].isDouble)
+    {
+        isDoubled = true;
+    }
     pair<int, string> currMax;
     currMax = make_pair(0, "");
     if(dictionary.find(currWord) != dictionary.end())
     {
-        listOfValids[currWord] = currVal;
-        currMax = make_pair(currVal, currWord);
+        listOfValids[currWord] = isDoubled ? currVal * 2 : currVal + currWord.size() >= 5 ? currWord.size() * 2 : 0;
+        currMax = make_pair(isDoubled ? currVal * 2  : currVal + currWord.size() >= 5 ? currWord.size() * 2 : 0, currWord);
     }
     // If the word fragment doesn't exist in the trie, return the current max early
     if(!(head->search(currWord)))
@@ -222,7 +229,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col < board[row].size() - 1 && alreadyUsed[row][col + 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row, col + 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -232,7 +239,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col > 0 && alreadyUsed[row][col - 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row, col - 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -242,7 +249,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(row < board.size() - 1 && alreadyUsed[row + 1][col] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row + 1, col, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -252,7 +259,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(row > 0 && alreadyUsed[row - 1][col] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row - 1, col, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -262,7 +269,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col < board[row].size() - 1 && row < board.size() - 1 && alreadyUsed[row + 1][col + 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row + 1, col + 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -272,7 +279,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col < board[row].size() - 1 && row > 0 && alreadyUsed[row - 1][col + 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row - 1, col + 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -282,7 +289,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col > 0 && row < board.size() - 1 && alreadyUsed[row + 1][col - 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row + 1, col - 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -292,7 +299,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
     if(col > 0 && row > 0 && alreadyUsed[row - 1][col - 1] == false)
     {
         pair<int,string> tempVal = solverHelper(board, dictionary, alreadyUsed, row - 1, col - 1, 
-            currWord, currVal, listOfValids, head);
+            currWord, currVal, listOfValids, head, isDoubled);
         if(currMax.first < tempVal.first)
         {
             currMax = tempVal;
@@ -305,7 +312,7 @@ pair<int,string> solverHelper(const vector<vector<Cell>>& board, const unordered
 /*
     Primary Solver Function. Returns the largest word and its point value given the board and a dictionary of valid words.
 */
-pair<int,string> solver(const vector<vector<Cell>>& board, const unordered_set<string>& dictionary, Trie* head)
+pair<int, string> solver(const vector<vector<Cell>>& board, const unordered_set<string>& dictionary, Trie* head)
 {
     // Used to keep track of if the letter is already being used for the word
     vector<vector<bool>> alreadyUsed(board.size(), vector<bool>(board[0].size(), false));
@@ -318,7 +325,7 @@ pair<int,string> solver(const vector<vector<Cell>>& board, const unordered_set<s
         for(int col = 0; col < board[row].size(); col++)
         {
             alreadyUsed = vector<vector<bool>>(board.size(), vector<bool>(board[0].size(), false));
-            pair<int,string> tempBest = solverHelper(board, dictionary, alreadyUsed, row, col, "" , 0, listOfValids, head);
+            pair<int,string> tempBest = solverHelper(board, dictionary, alreadyUsed, row, col, "" , 0, listOfValids, head, false);
             if(tempBest.first > bestWord.first)
             {
                 bestWord = tempBest;
@@ -332,12 +339,12 @@ pair<int,string> solver(const vector<vector<Cell>>& board, const unordered_set<s
     Main function. Reads the command line and runs the solver. Returns the best word.
 */
 int main(int argc, char** argv) {
-    string boardStr;
-    for(int i = 1; i < argc; i++)
-    {
-        boardStr += argv[i];
-    }
-    vector<vector<Cell>> board = convertBoard(boardStr);
+    string boardStr = argv[1];
+    // doublePos is a string with the first char being the row and the second char being the column
+    string doublePos = argv[2];
+    // multipliedWord is first char being row, second being column, and third being the multiplier
+    string multipliedWord = argv[3];
+    vector<vector<Cell>> board = convertBoard(boardStr, multipliedWord, doublePos);
     unordered_set<string> dictionary;
     Trie* head = new Trie();
     ifstream ifs("static/files/diction.txt");
@@ -353,7 +360,7 @@ int main(int argc, char** argv) {
         head->insert(word);
     }
     auto result = solver(board, dictionary, head);
-    cout << result.second << ' ' << result.first << endl;
+    cout << result.first << " " << result.second;
 }
 
 /*
