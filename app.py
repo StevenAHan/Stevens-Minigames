@@ -44,7 +44,13 @@ def wip():
 @app.route("/sudoku_solver", methods=["GET", "POST"])
 def sudoku_solver():
     if request.method == "POST":
-        to_input = ['./sudokuSolver', "[53..7....][6..195...][.98....6.][8...6...3][4..8.3..1][7...2...6][.6....28.][...419..5][....8..79]"]
+        second_input = "["
+        for i in range(1,82):
+            second_input += request.form.get("cell" + str(i)) if request.form.get("cell" + str(i)) != "" else "."
+            if(i % 9 == 0):
+                second_input += "]["
+        second_input = second_input[:-1]
+        to_input = ['./sudokuSolver', second_input]
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         # if there is no solution
         if(output[0] == "T"):
@@ -54,7 +60,7 @@ def sudoku_solver():
             outputs[i] = outputs[i][1:-1]
             outputs[i] = outputs[i].split(",")
         outputs = outputs[:-1]
-        return render_template("sudoku_solver.html", tbl=zip(*outputs))
+        return render_template("sudoku_solver.html", tbl=outputs)
 
     return render_template("sudoku_solver.html")
 
