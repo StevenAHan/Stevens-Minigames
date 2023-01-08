@@ -351,6 +351,11 @@ pair<int, string> solver(const vector<vector<Cell>>& board, const unordered_set<
     Main function. Reads the command line and runs the solver. Returns the best word.
 */
 int main(int argc, char** argv) {
+    if(argc <= 4)
+    {
+        cout << argc << endl;
+        return 0;
+    }
     string boardStr = argv[1];
     // doublePos is a string with the first char being the row and the second char being the column
     string doublePos = argv[2];
@@ -396,6 +401,7 @@ int main(int argc, char** argv) {
             }
         }
     }
+
     cout << result.first << " " << result.second << " " << usedHint;
 }
 

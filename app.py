@@ -67,10 +67,14 @@ def sudoku_solver():
 @app.route("/spellcast_solver", methods=["GET", "POST"])
 def spellcast_solver():
     if request.method == "POST":
-        letters = request.form.get("letters")
+        letters = ""
+        for i in range(1,26):
+            letters += request.form.get("cell" + str(i))
         unique_tiles = request.form.get("unique-tiles")
         letters = letters.strip()
-        to_input = ["./spellcastSolver", letters, unique_tiles]
+        to_input = ["./spellcastSolver", letters]
+        to_input += unique_tiles.split()
+        print(to_input)
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         return render_template("spellcast_solver.html", output = output)
 
@@ -79,7 +83,3 @@ def spellcast_solver():
     
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-# print(output)
