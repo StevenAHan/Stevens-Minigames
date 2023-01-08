@@ -60,6 +60,18 @@ vector<vector<Cell>> convertBoard(const string& board, const string& multipliedW
     return vec;
 }
 
+void convertCell(vector<vector<Cell>>& board, int row, int col, char newChar)
+{
+    unordered_map<char, int> defaults;
+    defaults = {{'a', 1}, {'b', 4}, {'c', 5}, {'d', 3}, {'e', 1},
+            {'f', 5}, {'g', 3}, {'h', 4}, {'i', 1}, {'j', 7},
+            {'k', 6}, {'l', 3}, {'m', 4}, {'n', 2}, {'o', 1},
+            {'p', 4}, {'q', 8}, {'r', 2}, {'s', 2}, {'t', 2},
+            {'u', 4}, {'v', 5}, {'w', 5}, {'x', 7}, {'y', 4}, {'z', 5}};
+    Cell newCell(newChar, defaults[newChar]);
+    board[row][col] = newCell;
+}
+
 // A class to store a Trie node
 class Trie
 {
@@ -344,6 +356,8 @@ int main(int argc, char** argv) {
     string doublePos = argv[2];
     // multipliedWord is first char being row, second being column, and third being the multiplier
     string multipliedWord = argv[3];
+    // checks to see how many hints user is able to use
+    string hints = argv[4];
     vector<vector<Cell>> board = convertBoard(boardStr, multipliedWord, doublePos);
     unordered_set<string> dictionary;
     Trie* head = new Trie();
@@ -360,7 +374,29 @@ int main(int argc, char** argv) {
         head->insert(word);
     }
     auto result = solver(board, dictionary, head);
-    cout << result.first << " " << result.second;
+    bool usedHint = false;
+    vector<vector<Cell>> newBoard = board;
+    if(hints == "1")
+    {
+        for(int row = 0; row < 5; row++)
+        {
+            for(int col = 0; col < 5; col++)
+            {
+                for(char newChar = 'a'; newChar <= 'z'; newChar++)
+                {
+                    convertCell(newBoard, row, col, newChar);
+                    auto tempResult = solver(newBoard, dictionary, head);
+                    if(tempResult.first > result.first)
+                    {
+                        result = tempResult;
+                        usedHint = true;
+                    }
+                    newBoard = board;
+                }
+            }
+        }
+    }
+    cout << result.first << " " << result.second << " " << usedHint;
 }
 
 /*
