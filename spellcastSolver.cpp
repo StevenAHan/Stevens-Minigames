@@ -404,13 +404,3 @@ int main(int argc, char** argv) {
 
     cout << result.first << " " << result.second << " " << usedHint;
 }
-
-/*
-    Things that still must be done
-
-    - Finish the default character values.
-    - Implement length boost
-    - Implement double, triple words.
-    - Implement double cell.
-    - Implement power ups.
-*/
