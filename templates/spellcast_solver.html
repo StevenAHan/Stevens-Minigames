@@ -52,8 +52,20 @@
                 <td><input name="cell25" class="tblinput" type="text"></td>
               </tr>
             </table>
-            <label for="unique-tiles">Enter in the Unique Tiles:</label>
-            <input type="text" name="unique-tiles" placeholder="ex: 00 002 1" class="Inputs"></input>
+            <label for="double-word-tile">Enter in the Double Word Unique Tile Location(Row/Col):</label>
+            <input type="text" name="double-word-tile" placeholder="ex: 00" class="Inputs"></input>
+            <br>
+            <label for="unique-letter-tile">Enter in the Double/Triple Letter Unique Tile Location(Row/Col/Multiplier):</label>
+            <input type="text" name="unique-letter-tile" placeholder="ex: 002" class="Inputs"></input>
+
+            <div class="form-group">
+              <label for="use-swap">Use a swap power up?</label>
+              <input type="radio" name="use-swap" class="use-swap" value="1"></input>
+              <label for="Yes">Yes</label>
+              <input type="radio" name="use-swap" class="use-swap" value="0" checked></input>
+              <label for="No">No</label>
+            </div>
+
           </div>
 
 

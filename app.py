@@ -70,11 +70,12 @@ def spellcast_solver():
         letters = ""
         for i in range(1,26):
             letters += request.form.get("cell" + str(i))
-        unique_tiles = request.form.get("unique-tiles")
+        unique_tiles = request.form.get("double-word-tile") + " "
+        unique_tiles += request.form.get("unique-letter-tile") + " "
+        unique_tiles += request.form.get("use-swap")
         letters = letters.strip()
         to_input = ["./spellcastSolver", letters]
         to_input += unique_tiles.split()
-        print(to_input)
         output = subprocess.run(to_input, stdout = subprocess.PIPE, universal_newlines = True).stdout
         return render_template("spellcast_solver.html", output = output)
 

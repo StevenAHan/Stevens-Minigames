@@ -1,4 +1,8 @@
 table{
     border: solid 1px gray;
     width: 12%;
-  } input{ width: 100%;}
+  } 
+
+.tblinput{ 
+  width: 100%;
+}
