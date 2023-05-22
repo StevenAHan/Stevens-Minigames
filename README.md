@@ -16,6 +16,14 @@ https://stevens-minigames.herokuapp.com/sudoku_solver. Given a incomplete board,
 
 In the given board, input your incomplete sudoku board, and press the button. It will give the solution, if it exists.
 
+## Spellcast Solver
+
+https://stevens-minigames.herokuapp.com/spellcast_solver. Given a incomplete board, determines if there is a valid solution for the problem. If there is, gives the solution.
+
+### How to Use
+
+In the given board, input your spellcast board, input the positions of the double tile and the multiplied letter tile. It will output the highest point solution.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
