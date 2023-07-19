@@ -1,3 +1,22 @@
+@font-face {
+    font-family: 'Souvenir';
+    src: url("../fonts/Souvenir-Medium.otf");
+}
+  
+  @font-face {
+    font-family: 'Alfa';
+    src: url("../fonts/AlfaSlabOne-Regular.ttf");
+}
+
+* {
+    font-family: "Souvenir";
+}
+
+h1 {
+    font-family: "Alfa";
+}
+  
+
 .container {
     position: relative;
     width: 25%;
