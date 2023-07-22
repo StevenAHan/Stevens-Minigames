@@ -52,7 +52,6 @@ string solver(vector<pair<double,string>>& nums)
             for(int j = i + 1; j < nums.size(); j++)
             {
                 vector<pair<double,string>> newNums = nums;
-                // for(auto num : newNums) { cout << num.first << " ";} cout << endl;
                 // +
                 newNums[i].first = newNums[i].first + newNums[j].first;
                 newNums[i].second = "(" + newNums[i].second + "+" +  newNums[j].second + ")";
