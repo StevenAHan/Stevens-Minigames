@@ -2,3 +2,13 @@ table{
     border: solid 1px gray;
     width: 25%;
   } input{ width: 100%;}
+
+  @media screen and (max-width: 1000px) {
+    table {
+      width: 80%;
+    }
+  
+    input {
+      width: 90%;
+    }
+  }

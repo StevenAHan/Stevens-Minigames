@@ -6,3 +6,13 @@ table{
 .tblinput{ 
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 80%; 
+  }
+
+  input {
+    width: 90%;
+  }
+}
