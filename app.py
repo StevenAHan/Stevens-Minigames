@@ -1,15 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 
 import subprocess
-import logging
-import sys
+
 
 app = Flask(__name__)
-
-app.config["SECRET_KEY"] = "HAVEFUN!"
-
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
 
 # Default route
 @app.route("/")
