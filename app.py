@@ -79,6 +79,10 @@ def spellcast_solver():
 def rps():
     return render_template("rps.html")
 
+@app.route("/rps/start")
+def rpsStart():
+    return render_template("rps_start.html")
+
     
 if __name__ == "__main__":
     app.run(debug=True)
